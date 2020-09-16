@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+  <h2>总价格：{{totalPrice}}</h2>
+
+
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      books: [
+        {id: 110, name: '数学之美', price: 119},
+        {id: 111, name: '美术', price: 105},
+        {id: 112, name: '白夜行', price: 50},
+        {id: 113, name: '美丽人生', price: 87},
+      ]
+    },
+    //计算属性会缓存，若多次使用只会调用一次
+    computed: {
+      //统计总价
+      totalPrice: function () {
+        let result = 0;
+        for (let i=0; i < this.books.length; i++){
+          result += this.books[i].price;
+        }
+        return result
+
+      }
+
+    },
+
+  })
+</script>
+</body>
+</html>

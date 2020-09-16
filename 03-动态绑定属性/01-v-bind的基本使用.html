@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  动态src属性-->
+<!--  不可以用mustache 它只能是content绑定-->
+  <img v-bind:src="imageURL" alt="">
+
+<!--  动态a href属性-->
+  <a v-bind:href="aHref">百度一下</a>
+
+<!--  语法糖简写-->
+  <img :src="imageURL" alt="">
+  <a :href="aHref">百度一下</a>
+
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      imageURL: 'https://img12.360buyimg.com/pop/s1180x940_jfs/t1/95956/10/16241/89041/5e79b5a2Eeb9a7a7d/8a7e3a247244e3c2.jpg.webp',
+      aHref: 'http://www.baidu.com',
+    }
+  })
+</script>
+</body>
+</html>

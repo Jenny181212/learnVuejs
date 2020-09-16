@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn ref="aaa"></cpn>
+  <button @click="btnClick">案例</button>
+</div>
+
+<template id="cpn">
+  <div>我是子组件</div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好'
+    },
+    methods: {
+      btnClick(){
+        //1. $children是个存储component的数组 但是每次去索引值很麻烦
+        // console.log(this.$children);
+        // for(let c of this.$children)
+        // {
+        //   console.log(c.name);
+        //   c.showMessage();
+        // }
+
+        //2. $refs对象类型，默认是空，取特指的组件标签值如$refs.aaa
+        console.log(this.$refs.aaa.name);
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        data(){
+          return {
+            name: "我是子组件"
+          }
+        },
+        methods: {
+          showMessage(){
+            console.log('showMessage');
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

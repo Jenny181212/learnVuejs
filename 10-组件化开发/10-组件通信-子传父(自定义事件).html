@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--父组件模板-->
+<div id="app">
+<!--  会默认将item传入-->
+  <cpn @item-click="cpnClick"></cpn>
+</div>
+
+<!--子组件模板-->
+<template id="cpn">
+  <!-- 子组件有多个标签需要这里至少一个父div包着-->
+  <div>
+    <button v-for="item in categories" @click="btnClick(item)">
+      {{item.name}}
+    </button>
+  </div>
+
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  //1.子组件
+  const cpn = {
+    template: '#cpn',
+    data(){
+      return{
+        categories: [
+          {id: '1', name: '热门推荐'},
+          {id: '2', name: '手机数码'},
+          {id: '3', name: '家用电器'},
+        ]
+      }
+    },
+    methods: {
+      btnClick(item) {
+        //通过$emit发出事件：（自定义事件，传入） 名字跟父标签方法一样
+        this.$emit('item-click',item)
+      }
+    },
+  }
+  //2.父组件
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'hello',
+    },
+    components: {
+      cpn
+    },
+    methods: {
+      cpnClick(item){
+        console.log(item);
+      }
+    }
+  })
+</script>
+</body>
+</html>

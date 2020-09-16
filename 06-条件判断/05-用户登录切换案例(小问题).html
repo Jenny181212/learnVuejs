@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--为什么点击btn之后input不会清空-->
+<!--vue会把dom渲染到浏览器之前，全部都抽象起来叫抽象dom，出于性能考虑会自己复用input-->
+<!--解决办法：设置不同的key，会发现不一样就不复用-->
+<div id="app">
+  <span v-if="isUser">
+<!-- laber for是给input的id-->
+    <label for="username">用户账号</label>
+    <input type="text" id="username" placeholder="用户账号" key="username">
+  </span>
+  <span v-else>
+    <label for="email">用户邮箱</label>
+    <input type="text" id="email" placeholder="用户邮箱" key="email">
+  </span>
+  <button @click="changeUser">切换类型</button>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      isUser: true,
+    },
+    methods: {
+      changeUser(){
+        this.isUser = !this.isUser;
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  radio name设置只能单选-->
+<!--  v-model可以将值直接放进sex里面-->
+  <label for="male">
+    <input type="radio" id="male" name="sex" value="男" v-model="sex">男
+  </label>
+  <label for="female">
+    <input type="radio" id="female" name="sex" value="女" v-model="sex">女
+  </label>
+
+  <h2>选择的是：{{sex}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      sex: '',
+    }
+  })
+</script>
+</body>
+</html>

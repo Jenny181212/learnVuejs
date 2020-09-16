@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <button @click="changeShow()">切换</button>
+
+  <!--  当isShow是true的时候，一样；false时，会有不同，aaa直接消失而bbb只是display：none-->
+<!--  如何选择？多次切换用v-show，只有一次用v-if-->
+  <h2 v-if="isShow" id="aaa">{{message}}</h2>
+  <h2 v-show="isShow" id="bbb">{{message}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      isShow: true,
+    },
+    methods: {
+      changeShow(){
+        this.isShow = !this.isShow;
+      }
+    }
+  })
+</script>
+</body>
+</html>

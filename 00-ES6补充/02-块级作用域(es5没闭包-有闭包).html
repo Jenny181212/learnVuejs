@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+<script>
+  //1.没有块级作用域引起的问题：for块级
+  var btns = document.getElementsByTagName('button');
+  for (var i=0; i < btns.length; i++){
+    //1.情况一：（错误用法）ES5没有用闭包
+    // 被覆盖，显示的只有最后一个按钮5
+    // btns[i].addEventListener('click',function () {
+    //   console.log('第' + i + '个按钮被点击');
+    // })
+
+    //2.情况二：ES5用闭包
+    (function (num) {
+      btns[num].addEventListener('click',function () {
+        console.log('第' + num + '个按钮被点击');
+      })
+    })(i)
+  }
+
+  //3.ES6中的let
+  const btns = document.getElementsByTagName('button');
+  for (let i=0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function () {
+      console.log('第' + i + '个按钮被点击');
+    })
+  }
+
+
+
+</script>
+</body>
+</html>

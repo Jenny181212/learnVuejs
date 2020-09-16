@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--组件实例对象-->
+<div id="app">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>当前计数：{{counter}}</h2>
+    <button @click="decrement">-</button>
+    <button @click="increment">+</button>
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  //1.注册组件
+  const obj = {
+    counter: 0,
+  }
+
+  Vue.component('cpn', {
+    template: '#cpn',
+    //data是一个函数 返回对象地址不同
+    data(){
+      return{
+        counter: 0
+      }
+    },
+
+    //若不为函数则改变同一个obj
+    // data(){
+    //   return obj
+    // },
+
+    methods: {
+      increment(){
+        this.counter ++
+      },
+      decrement(){
+        this.counter --
+      }
+    },
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '你好',
+      //不可以在这里访问title
+      title: 'aab'
+    },
+
+  })
+</script>
+</body>
+</html>

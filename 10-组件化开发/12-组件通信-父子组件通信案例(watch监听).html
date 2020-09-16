@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--想要进行双向绑定 并且传入数据进行显示-->
+<!--num1与num2相互差值100-->
+
+<div id="app">
+  <cpn :number1="num1"
+       :number2="num2"
+       @num1change="num1cpn"
+       @num2change="num2cpn"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+<!--    承接爸爸的props-->
+    <h2>props: {{number1}}</h2>
+<!--    儿子自己的data显示-->
+    <h2>data: {{dnumber1}}</h2>
+<!--    因为这里input绑定的model不可以props来改变，只能data-->
+    <input type="text" v-model="dnumber1">
+
+    <h2>props: {{number2}}</h2>
+    <h2>data: {{dnumber2}}</h2>
+    <input type="text" v-model="dnumber2">
+
+  </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: 1,
+      num2: 0,
+    },
+    methods: {
+      num1cpn(value) {
+        this.num1 = parseInt(value)
+      },
+      num2cpn(value) {
+        this.num2 = parseInt(value)
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          number1: Number,
+          number2: Number,
+        },
+        data(){
+          return{
+            dnumber1: this.number1,
+            dnumber2: this.number2
+          }
+        },
+        watch: {
+          dnumber1(newValue){
+            this.dnumber2 = newValue * 100;
+            this.$emit('num1change',newValue);
+          },
+          dnumber2(newValue){
+            this.dnumber1 = newValue / 100;
+            this.$emit('num2change',newValue);
+          },
+        },
+      }
+    }
+  })
+</script>
+</body>
+</html>

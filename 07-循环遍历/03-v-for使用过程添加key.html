@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--添加了key绑定后，split添加vue内部性能可以改善-->
+<!--  因为这样子添加可以直接新建，不需要后移-->
+<!--  key要具有唯一性-->
+  <ul>
+<!--    app.letters.splice(2,0,'U')-->
+    <li v-for="item in letters" :key="item">{{item}}</li>
+  </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      letters: ['N', 'C', 'T']
+    }
+  })
+</script>
+</body>
+</html>

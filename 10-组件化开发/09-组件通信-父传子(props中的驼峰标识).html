@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--props用驼峰cInfo 写的话这里要用-进行分割-->
+<div id="app">
+  <cpn :c-info="info" :child-message="message"></cpn>
+</div>
+
+
+<template id="cpn">
+<!-- 子组件有多个标签需要这里至少一个父div包着-->
+  <div>
+    <h2>{{cInfo}}</h2>
+    <h2>{{childMessage}}</h2>
+  </div>
+
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template: '#cpn',
+    props: {
+      cInfo: {
+        type: Object,
+        default(){
+          return{}
+        }
+      },
+      childMessage: {
+        type: String,
+        default: ''
+      }
+    }
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      info: {
+        name: 'ty',
+        age: 25,
+        height: 1.75,
+      },
+      message: 'hello',
+    },
+    components: {
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

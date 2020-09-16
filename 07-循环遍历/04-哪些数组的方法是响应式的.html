@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <li v-for="item in letters">{{item}}</li>
+  </ul>
+  <button @click="btnClick">按钮</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      letters: ['N', 'C', 'T']
+    },
+    methods: {
+      btnClick(){
+        //1. push方法
+        //this.letters.push('aaa');
+
+        //2. （注意！）通过索引值修改数组值，这个不可以做出响应式
+        //this.letters[0] = 'bbb';
+
+        //可以用splice改
+        //this.letters.splice(0, 1, 'bbb');
+
+        //可以用Vue.set()修改
+        Vue.set(this.letters, 0, 'bbb');
+
+        //以下都是可以做到响应式的
+        // push() 在数组最后插入元素【可插入多个】
+        // pop() 删除数组最后一个元素
+        // shift() 删除数组第一个元素
+        // unshift() 在数组最前插入元素【可插入多个】
+
+        // splice可以删除/插入/替换元素
+        // 删除元素：第二个参数是你要删多少个
+        // 替换元素：第二个参数是你要替换多少个，后面是替换元素
+        // 插入元素：第二个参数0，后面是插入元素
+        // splice(start)
+
+        // sort() 排序
+        // reverse() 倒序
+
+        //可以用Vue.set()修改
+      }
+    }
+  })
+</script>
+</body>
+</html>
